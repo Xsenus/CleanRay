@@ -1,119 +1,112 @@
-# Luchisto — Cleaning Services Landing (React + Vite + Tailwind, TypeScript)
+# CleanRay — лендинг клининговой компании (React + Vite + Tailwind, TypeScript)
 
-A fast, accessible, SEO‑ready landing page for a cleaning company. Built with **Vite**, **React 18**, **TypeScript**, and **TailwindCSS**. Includes an instant price calculator, lead form (Web3Forms), comparison slider (before/after), and basic SEO via **react-helmet-async**.
-
-> This README is exhaustive and production‑oriented. It covers project setup, environment, scripts, structure, quality gates, deployment (GitHub Pages / Vercel / Netlify), and Codespaces dev containers.
+Быстрый, доступный и SEO‑готовый лендинг для клинингового сервиса. Построен на **Vite 5**, **React 18**, **TypeScript** и **TailwindCSS**. Включает калькулятор стоимости, форму лида (Web3Forms), слайдер «до/после» и базовую SEO‑настройку через **react-helmet-async**.
 
 ---
 
-## Table of Contents
+## Оглавление
 
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment variables](#environment-variables)
-  - [Development](#development)
-  - [Scripts](#scripts)
-- [Project Structure](#project-structure)
-- [Code Quality](#code-quality)
-- [Accessibility & SEO](#accessibility--seo)
-- [Deployment](#deployment)
-  - [GitHub Pages (recommended for static hosting)](#github-pages-recommended-for-static-hosting)
+- [Стек](#стек)
+- [Возможности](#возможности)
+- [Быстрый старт](#быстрый-старт)
+  - [Требования](#требования)
+  - [Установка](#установка)
+  - [Переменные окружения](#переменные-окружения)
+  - [Режим разработки](#режим-разработки)
+  - [Скрипты](#скрипты)
+- [Структура проекта](#структура-проекта)
+- [Качество кода](#качество-кода)
+- [Доступность и SEO](#доступность-и-seo)
+- [Деплой](#деплой)
+  - [GitHub Pages (статический хостинг)](#github-pages-статический-хостинг)
   - [Vercel](#vercel)
   - [Netlify](#netlify)
 - [GitHub Codespaces / Dev Container](#github-codespaces--dev-container)
-- [Security Notes](#security-notes)
-- [FAQ](#faq)
-- [License](#license)
+- [Безопасность](#безопасность)
+- [Лицензия](#лицензия)
 
 ---
 
-## Tech Stack
+## Стек
 
-- **Build tool**: Vite 5
+- **Сборка**: Vite 5
 - **UI**: React 18 + TypeScript
-- **Styles**: TailwindCSS 3
-- **Icons**: lucide-react
+- **Стили**: TailwindCSS 3
+- **Иконки**: lucide-react
 - **SEO**: react-helmet-async
-- **Linting**: ESLint 9 (typescript-eslint, react-refresh, react-hooks)
+- **Линтинг**: ESLint 9 (typescript-eslint, react-refresh, react-hooks)
 
-## Features
+## Возможности
 
-- ✨ Hero section with animated rays and brand logo
-- 🔁 Before/After **ComparisonSlider**
-- 🧮 **InstantQuote** price calculator (configurable)
-- 📝 **LeadForm** with Web3Forms (no backend needed)
-- 🕸️ Basic SEO: title/description/meta via **react-helmet-async**
-- 📱 Fully responsive (mobile‑first) and keyboard‑navigable
-- 🧩 Strict TypeScript configuration
-- 🧪 Ready for CI build & Pages deployment
+- ✨ Герой‑секция с анимированными лучами и логотипом
+- 🔁 Слайдер сравнения **до/после** (ComparisonSlider)
+- 🧮 **InstantQuote** — калькулятор стоимости (настраиваемые тарифы)
+- 📝 **LeadForm** с отправкой в Web3Forms (без собственного бэкенда)
+- 🕸️ Базовое SEO: `<title>`, `description`, соц‑превью через **react-helmet-async**
+- 📱 Полная адаптивность и доступность (клавиатурная навигация, фокус‑состояния)
+- 🧩 Строгая типизация TypeScript
+- 🧪 Готовность к CI‑сборке и деплою на GitHub Pages
 
 ---
 
-## Getting Started
+## Быстрый старт
 
-### Prerequisites
+### Требования
 
-- **Node.js 20+** (LTS). Check with `node -v`.
-- **npm** (bundled with Node). You can also use **pnpm** or **yarn** if preferred.
+- **Node.js 20+** (LTS). Проверка: `node -v`
+- **npm** (входит в состав Node). Можно использовать и **pnpm/yarn**, но по умолчанию — npm.
 
-> If you previously saw `pnpm : command not found`, simply use **npm** (this repo includes a `package-lock.json`).
-
-### Installation
+### Установка
 
 ```bash
-# 1) Install dependencies
+# 1) Установка зависимостей
 npm ci
 
-# 2) Start the dev server
+# 2) Запуск дев‑сервера
 npm run dev
-# If running inside a container/VM, expose host:
+# Для запуска в контейнере/VM — проброс хоста:
 npm run dev -- --host
 ```
 
-Open http://localhost:5173
+Откройте [http://localhost:5173](http://localhost:5173)
 
-### Environment variables
+### Переменные окружения
 
-Copy `.env.example` to `.env` and fill in values:
+Скопируйте `.env.example` в `.env` и заполните значения:
 
 ```ini
 # .env
-VITE_HERO_LOGO=/images/logos/luchisto-logo-horizontal.svg
-VITE_WEB3FORMS_KEY=REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY
+VITE_HERO_LOGO=/images/logos/CleanRay-logo-horizontal.svg
+VITE_WEB3FORMS_KEY=ЗАМЕНИТЕ_НА_СВОЙ_WEB3FORMS_ACCESS_KEY
 VITE_WEB3FORMS_TO=you@example.com
 ```
 
-> **Never commit `.env`**. It is ignored by `.gitignore`.
-
-### Development
+### Режим разработки
 
 ```bash
-# Type-check (if you add a script)
+# Проверка типов (если добавите отдельный скрипт)
 # npx tsc --noEmit
 
-# Lint
+# Линтинг
 npm run lint
 ```
 
-### Scripts
+### Скрипты
 
-- `npm run dev` — start Vite dev server
-- `npm run build` — production build to `dist/`
-- `npm run preview` — preview the production build locally
-- `npm run lint` — run ESLint
+- `npm run dev` — дев‑сервер Vite
+- `npm run build` — продакшен‑сборка в `dist/`
+- `npm run preview` — локальный предпросмотр сборки
+- `npm run lint` — ESLint
 
 ---
 
-## Project Structure
+## Структура проекта
 
-```
+```bash
 .
 ├── public/
 │   ├── images/
-│   │   └── logos/            # brand assets
+│   │   └── logos/
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── src/
@@ -130,7 +123,7 @@ npm run lint
 │   ├── hooks/
 │   │   └── useQuoteCalculator.ts
 │   ├── data/
-│   │   └── pricing.json      # pricing config for calculator
+│   │   └── pricing.json
 │   ├── types/
 │   │   └── index.ts
 │   ├── App.tsx
@@ -147,105 +140,89 @@ npm run lint
 
 ---
 
-## Code Quality
+## Качество кода
 
-- **ESLint** is configured with `@typescript-eslint` and `react-hooks` rules.
-- Keep components **small, typed, and single-responsibility**.
-- Prefer functional components and hooks.
-- Keep assets under `public/` for zero runtime fetch penalties.
-
-> Consider adding Prettier if your team prefers enforced formatting.
+- **ESLint** настроен с правилами `@typescript-eslint` и `react-hooks`.
+- Держите компоненты **маленькими, типизированными и с одной зоной ответственности**.
+- Предпочитайте функциональные компоненты и хуки.
+- Кладите статические файлы в `public/` — это избавляет от лишних запросов на рантайме.
 
 ---
 
-## Accessibility & SEO
+## Доступность и SEO
 
-- Keyboard focus states are visible and navigable.
-- Labels are associated to inputs in forms.
-- SEO is handled with **react-helmet-async** (`<Helmet>` in `App.tsx`):
-  - `title`, `meta[name="description"]`, social previews.
-- `robots.txt` and `sitemap.xml` are present in `public/`.
+- Видимые состояния фокуса и полная клавиатурная навигация.
+- Корректные подписи и связи `<label>` ↔ `<input>` в формах.
+- SEO через **react-helmet-async** (в `App.tsx`):
+  - `title`, `meta[name="description"]`, Open Graph/Twitter.
+- `robots.txt` и `sitemap.xml` находятся в `public/`.
 
 ---
 
-## Deployment
+## Деплой
 
-You have multiple zero‑config options. Below are ready‑to‑use setups.
+Ниже — готовые варианты с минимальной настройкой.
 
-### GitHub Pages (recommended for static hosting)
+### GitHub Pages (статический хостинг)
 
-This repo includes a CI workflow you can add at:
+В репозитории предусмотрен workflow:  
 `.github/workflows/deploy-pages.yml`
 
-It will:
+Он:
 
-1. Install dependencies
-2. Build the site
-3. Copy `index.html` to `404.html` (SPA fallback)
-4. Publish `dist/` to GitHub Pages
+1. Устанавливает зависимости
+2. Собирает проект
+3. Копирует `index.html` в `404.html` (SPA‑fallback)
+4. Публикует содержимое `dist/` на GitHub Pages
 
-**Steps:**
+**Шаги:**
 
-1. Create the workflow file (see below) and push to `main`.
-2. In your GitHub repo: **Settings → Pages** → Source: **GitHub Actions**.
-3. (Optional) If deploying to `https://<owner>.github.io/<repo>/`, set Vite base path:
-   - Either set `BASE_PATH=/REPO_NAME/` as an env var in the workflow and read it in `vite.config.ts`,
-   - Or hardcode `base: "/REPO_NAME/"` in `vite.config.ts`.
-4. Wait for the deployment job to finish; Pages will serve your site.
+1. Добавьте файл workflow (см. выше) и запушьте в `main`.
+2. В GitHub репозитории: **Settings → Pages** → Source: **GitHub Actions**.
+3. Если сайт будет на `https://<owner>.github.io/<repo>/`, укажите базовый путь для Vite:
+   - Передайте `BASE_PATH=/REPO_NAME/` как переменную среды в workflow и читайте её в `vite.config.ts`,
+   - Либо задайте `base: "/REPO_NAME/"` напрямую в `vite.config.ts`.
+4. Дождитесь завершения job — Pages начнёт отдавать сайт.
 
-> The provided workflow already handles the SPA 404 fallback.
+> Шаг с `404.html` уже включён, чтобы работали прямые переходы по маршрутам SPA.
 
 ### Vercel
 
-- Import the repo in Vercel.
-- Framework preset: **Vite**.
+- Импортируйте репозиторий в Vercel
+- Framework preset: **Vite**
 - Build command: `npm run build`
 - Output: `dist`
-- Env vars: add the ones from `.env` (VITE\_\*).
+- Переменные окружения: добавьте `VITE_*` из `.env`
 
 ### Netlify
 
-- New site from Git → select repo
+- New site from Git → выберите репозиторий
 - Build command: `npm run build`
 - Publish directory: `dist`
-- Add env vars.
+- Добавьте переменные окружения
 
 ---
 
 ## GitHub Codespaces / Dev Container
 
-Add `.devcontainer/devcontainer.json` (provided below). It uses Node 20 and automatically:
+Файл `.devcontainer/devcontainer.json` настраивает Node 20 и автоматически:
 
-- installs deps (`npm ci`) after container is created
-- starts the dev server (`npm run dev -- --host`)
-- forwards port `5173`
+- ставит зависимости (`npm ci`) после создания контейнера,
+- запускает дев‑сервер (`npm run dev -- --host`) при старте,
+- пробрасывает порт `5173`.
 
-Open with **Code → CodeSpaces → Create codespace on main**.
-
----
-
-## Security Notes
-
-- **Do not commit `.env`** or any secrets. Use repository/environment secrets in CI or host dashboards.
-- Web3Forms keys should be stored as secrets in deployment platforms.
-- Keep dependencies updated and review third‑party code.
+Откройте: **Code → Codespaces → Create codespace on main** — и через минуту у вас в браузере рабочее окружение с уже запущенным проектом.
 
 ---
 
-## FAQ
+## Безопасность
 
-**Q: I see `pnpm` not found.**  
-A: Use `npm ci` / `npm run dev`. If you prefer pnpm, install it globally (`npm i -g pnpm`) and create a `pnpm-lock.yaml` by running `pnpm install` once.
-
-**Q: How do I change the brand/logo?**  
-A: Replace assets in `public/images/logos/` and update `VITE_HERO_LOGO` in `.env`.
-
-**Q: Form submissions?**  
-A: The lead form posts to Web3Forms. Set `VITE_WEB3FORMS_KEY` and (optionally) `VITE_WEB3FORMS_TO` in `.env`.
+- **Не коммитьте `.env`** и секреты. Для CI/хостинга используйте секреты репозитория/окружения.
+- Ключ Web3Forms храните как секрет в панели хостинга/CI.
+- Регулярно обновляйте зависимости и проверяйте сторонний код.
 
 ---
 
-## License
+## Лицензия
 
-This project is currently **UNLICENSED / All rights reserved**.  
-If you plan to open‑source it, add a proper `LICENSE` file (e.g., MIT).
+[Связаться по email](mailto:xsenus92@gmail.com)
