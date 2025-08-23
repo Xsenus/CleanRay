@@ -20,7 +20,7 @@ export const MissionSection: React.FC = () => (
       </div>
 
       <div className="relative z-10 grid md:grid-cols-2 gap-8 p-6 sm:p-8">
-        {/* Левая колонка — текст и цитата */}
+        {/* Левая колонка — текст, цель, цитата и CTA */}
         <div>
           {/* Бейджи-акценты */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
@@ -35,26 +35,48 @@ export const MissionSection: React.FC = () => (
             </span>
           </div>
 
+          {/* Цель компании */}
+          <h4 className="text-base font-semibold text-ink mb-2">Наша цель</h4>
+          <p className="mb-4">
+            Обеспечивать высокий стандарт чистоты и уюта в доме, предлагая профессиональный клининг,
+            который с уверенностью дарят близким — женам, мамам и семьям.
+          </p>
+
+          {/* Миссия */}
+          <h4 className="text-base font-semibold text-ink mb-2">Миссия</h4>
           <p className="mb-4">
             Мы — надёжные помощники в создании идеального порядка. Сочетая высокое качество услуг,
-            бережный подход и внимание к деталям, мы дарим женщинам освобождение от бытовой рутины,
-            свежесть в доме и радость в мелочах.
+            бережный подход и внимание к деталям, дарим освобождение от бытовой рутины, свежесть в
+            доме и радость в мелочах.
           </p>
           <p className="mb-4">
             Наша миссия — быть тем самым лучом света, который делает дом чище, атмосферу — легче, а
             настроение — лучше.
           </p>
 
-          {/* Цитата-выделение */}
+          {/* Слоган */}
           <figure className="relative mt-6 rounded-xl bg-white/70 ring-1 ring-gray-200 p-4 sm:p-5">
             <div className="absolute -top-3 -left-3 w-7 h-7 rounded-full bg-sun-50 ring-1 ring-sun/30 flex items-center justify-center">
               <Quote className="w-4 h-4 text-sun" />
             </div>
             <blockquote className="italic text-ink/90">
-              «Мы поддерживаем высокий стандарт чистоты и уюта, чтобы вы проводили больше времени с
-              близкими, а не с уборкой».
+              «ЛУЧисто: когда чисто — по-настоящему».
             </blockquote>
           </figure>
+
+          {/* CTA: абонемент и подарок */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="#quote"
+              className="inline-flex justify-center items-center bg-brand hover:bg-brand-600 text-white px-5 py-3 rounded-md font-semibold transition-colors">
+              Регулярный клининг
+            </a>
+            <a
+              href="#quote"
+              className="inline-flex justify-center items-center border-2 border-brand text-brand hover:bg-brand hover:text-white px-5 py-3 rounded-md font-semibold transition-colors">
+              Подарить уборку
+            </a>
+          </div>
         </div>
 
         {/* Правая колонка — ценности и мини-статистика */}
