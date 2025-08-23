@@ -93,19 +93,41 @@ function App() {
 
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-100 to-white">
-          <HeroRays />
+          {/* Фоновые слои */}
+          <div aria-hidden="true" className="absolute inset-0 z-0">
+            {/* Фото */}
+            <div
+              className="absolute inset-0 bg-center bg-cover opacity-40 sm:opacity-60 pointer-events-none select-none"
+              style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/hero-window.jpg)` }}
+            />
+            {/* Затухание к низу для читаемости текста */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/90" />
+          </div>
+
+          {/* Лучи — поверх фото */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 z-20 pointer-events-none select-none opacity-80">
+            <HeroRays />
+          </div>
+
+          {/* Логотип-призрак под лучами */}
           {heroLogoSrc && (
             <img
               src={heroLogoSrc}
               alt=""
               aria-hidden="true"
-              className="absolute left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 opacity-5 sm:opacity-10 pointer-events-none select-none
-               w-[55vw] max-w-[820px]"
+              className="absolute z-10 left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none select-none w-[55vw] max-w-[820px]"
             />
           )}
-          <Header onOrderClick={() => openLeadForm()} />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 text-center">
+          {/* Хедер гарантированно над лучами */}
+          <div className="relative z-30">
+            <Header onOrderClick={() => openLeadForm()} />
+          </div>
+
+          {/* Контент выше всего */}
+          <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 text-center">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-ink mb-6 leading-tight">
                 Профессиональная уборка <span className="text-brand">ЛУЧ</span>исто
@@ -115,7 +137,6 @@ function App() {
                 оборудования
               </p>
 
-              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
                 <button
                   onClick={() => openLeadForm()}
@@ -132,7 +153,6 @@ function App() {
                 </button>
               </div>
 
-              {/* Trust badges */}
               <TrustBadgesMarquee />
             </div>
           </div>
