@@ -5,20 +5,7 @@ import { HeroRays } from './components/HeroRays';
 import { Header } from './components/Header';
 import { InstantQuote } from './components/InstantQuote';
 import { LeadForm } from './components/LeadForm';
-import {
-  Sparkles,
-  Users,
-  CheckCircle,
-  Phone,
-  Mail,
-  Clock,
-  MapPin,
-  ArrowRight,
-  Leaf,
-  Wrench,
-  Eye,
-  ChevronDown,
-} from 'lucide-react';
+import { Users, CheckCircle, ArrowRight, Leaf, Wrench, Eye, ChevronDown } from 'lucide-react';
 import { MissionSection } from './components/MissionSection';
 import { GiftSection } from './components/GiftSection';
 import { SubscriptionSection } from './components/SubscriptionSection';
@@ -26,6 +13,7 @@ import { TrustBadgesMarquee } from './components/TrustBadgesMarquee';
 import { QuoteParams } from './types';
 import { HeroGhostLogo } from './components/HeroGhostLogo';
 import { ComparisonSliderSmart } from './components/ComparisonSliderSmart';
+import Footer from './components/Footer';
 
 function App() {
   const base = import.meta.env.BASE_URL;
@@ -460,90 +448,7 @@ function App() {
           </div>
         </Section>
 
-        {/* Footer */}
-        <footer className="relative bg-ink text-white">
-          {/* мягкая подсветка сверху футера */}
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_380px_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]"
-            aria-hidden="true"
-          />
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="grid md:grid-cols-4 gap-10 mb-10">
-              {/* Company Info */}
-              <div className="md:col-span-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <Sparkles className="w-8 h-8 text-brand" />
-                  <span className="text-2xl font-bold">ЛУЧисто</span>
-                </div>
-                <p className="text-white/75 leading-relaxed">
-                  Профессиональная клининговая компания в Алматы. Создаём идеальную чистоту в вашем
-                  доме с заботой о здоровье и окружающей среде.
-                </p>
-              </div>
-
-              {/* Contact Info */}
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Контакты</h4>
-                <address className="not-italic space-y-3">
-                  <a
-                    href="tel:+77270000000"
-                    className="flex items-center gap-3 text-white/80 hover:text-white">
-                    <Phone className="w-5 h-5 text-brand shrink-0" />
-                    +7 (727) 000-00-00
-                  </a>
-                  <a
-                    href="mailto:info@luchisto.kz"
-                    className="flex items-center gap-3 text-white/80 hover:text-white">
-                    <Mail className="w-5 h-5 text-brand shrink-0" />
-                    info@luchisto.kz
-                  </a>
-                  <div className="flex items-center gap-3 text-white/80">
-                    <MapPin className="w-5 h-5 text-brand shrink-0" />
-                    г. Алматы, ул. Примерная, 123
-                  </div>
-                  <div className="flex items-center gap-3 text-white/80">
-                    <Clock className="w-5 h-5 text-brand shrink-0" />
-                    Ежедневно с 8:00 до 22:00
-                  </div>
-                </address>
-              </div>
-
-              {/* Services */}
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Услуги</h4>
-                <nav className="space-y-2">
-                  <a href="#services" className="block text-white/80 hover:text-white">
-                    Поддерживающая уборка
-                  </a>
-                  <a href="#services" className="block text-white/80 hover:text-white">
-                    Генеральная уборка
-                  </a>
-                  <a href="#services" className="block text-white/80 hover:text-white">
-                    Специальная уборка
-                  </a>
-                  <a href="#quote" className="block text-white/80 hover:text-white">
-                    Расчёт стоимости
-                  </a>
-                </nav>
-              </div>
-            </div>
-
-            {/* Bottom line */}
-            <div className="border-t border-white/10 pt-6">
-              <div className="text-center">
-                <p className="text-sm text-white/80">
-                  <a
-                    href="mailto:xsenus92@gmail.com"
-                    className="underline-offset-4 hover:underline hover:text-white">
-                    xsenus92@gmail.com
-                  </a>
-                  <span className="mx-1">©</span> 2025
-                </p>
-                <p className="mt-1 text-xs text-white/60">Все права защищены.</p>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
 
         {/* Lead Form Modal */}
         <LeadForm isOpen={isLeadFormOpen} onClose={closeLeadForm} initialData={leadFormData} />
