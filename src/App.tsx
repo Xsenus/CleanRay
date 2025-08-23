@@ -3,7 +3,6 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Section } from './components/Section';
 import { HeroRays } from './components/HeroRays';
 import { Header } from './components/Header';
-import { ComparisonSlider } from './components/ComparisonSlider';
 import { InstantQuote } from './components/InstantQuote';
 import { LeadForm } from './components/LeadForm';
 import {
@@ -26,8 +25,11 @@ import { SubscriptionSection } from './components/SubscriptionSection';
 import { TrustBadgesMarquee } from './components/TrustBadgesMarquee';
 import { QuoteParams } from './types';
 import { HeroGhostLogo } from './components/HeroGhostLogo';
+import { ComparisonSliderSmart } from './components/ComparisonSliderSmart';
 
 function App() {
+  const base = import.meta.env.BASE_URL;
+
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
   const [leadFormData, setLeadFormData] = useState<Partial<QuoteParams>>();
 
@@ -96,7 +98,7 @@ function App() {
           <div aria-hidden="true" className="absolute inset-0 z-0">
             <div
               className="absolute inset-0 bg-center bg-cover opacity-40 sm:opacity-60 pointer-events-none select-none"
-              style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/hero-window.jpg)` }}
+              style={{ backgroundImage: `url(${base}images/hero-window.jpg)` }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/90" />
           </div>
@@ -154,10 +156,19 @@ function App() {
           subtitle="Посмотрите, как преображаются квартиры после уборки"
           background="gray">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+            {/* Кухня */}
             <div className="w-full max-w-[560px] space-y-3">
-              <ComparisonSlider
-                beforeImage="https://images.pexels.com/photos/6248900/pexels-photo-6248900.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                afterImage="https://images.pexels.com/photos/15409513/pexels-photo-15409513.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              <ComparisonSliderSmart
+                beforeCandidates={[
+                  `${base}images/results/kitchen-before.webp`,
+                  `${base}images/results/kitchen-before.jpg`,
+                  'https://images.pexels.com/photos/6248900/pexels-photo-6248900.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
+                afterCandidates={[
+                  `${base}images/results/kitchen-after.webp`,
+                  `${base}images/results/kitchen-after.jpg`,
+                  'https://images.pexels.com/photos/15409513/pexels-photo-15409513.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
                 beforeAlt="Кухня до уборки"
                 afterAlt="Кухня после уборки"
                 className="w-full aspect-[4/3] rounded-xl shadow-sm"
@@ -165,10 +176,19 @@ function App() {
               <p className="text-center text-muted font-medium">Кухня</p>
             </div>
 
+            {/* Ванная */}
             <div className="w-full max-w-[560px] space-y-3">
-              <ComparisonSlider
-                beforeImage="https://images.pexels.com/photos/10473003/pexels-photo-10473003.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                afterImage="https://images.pexels.com/photos/7005282/pexels-photo-7005282.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              <ComparisonSliderSmart
+                beforeCandidates={[
+                  `${base}images/results/bath-before.webp`,
+                  `${base}images/results/bath-before.jpg`,
+                  'https://images.pexels.com/photos/10473003/pexels-photo-10473003.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
+                afterCandidates={[
+                  `${base}images/results/bath-after.webp`,
+                  `${base}images/results/bath-after.jpg`,
+                  'https://images.pexels.com/photos/7005282/pexels-photo-7005282.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
                 beforeAlt="Ванная до уборки"
                 afterAlt="Ванная после уборки"
                 className="w-full aspect-[4/3] rounded-xl shadow-sm"
@@ -176,10 +196,19 @@ function App() {
               <p className="text-center text-muted font-medium">Ванная комната</p>
             </div>
 
+            {/* Гостиная */}
             <div className="w-full max-w-[560px] space-y-3">
-              <ComparisonSlider
-                beforeImage="https://images.pexels.com/photos/5102904/pexels-photo-5102904.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                afterImage="https://images.pexels.com/photos/19889135/pexels-photo-19889135.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              <ComparisonSliderSmart
+                beforeCandidates={[
+                  `${base}images/results/living-before.webp`,
+                  `${base}images/results/living-before.jpg`,
+                  'https://images.pexels.com/photos/5102904/pexels-photo-5102904.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
+                afterCandidates={[
+                  `${base}images/results/living-after.webp`,
+                  `${base}images/results/living-after.jpg`,
+                  'https://images.pexels.com/photos/19889135/pexels-photo-19889135.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                ]}
                 beforeAlt="Гостиная до уборки"
                 afterAlt="Гостиная после уборки"
                 className="w-full aspect-[4/3] rounded-xl shadow-sm"
