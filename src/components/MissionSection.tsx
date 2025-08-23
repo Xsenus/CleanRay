@@ -13,8 +13,7 @@ export const MissionSection: React.FC = () => (
     }
     subtitle="Мы — надёжные помощники в создании идеального порядка."
     background="white">
-    <div className="relative bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-      {/* Подсветка — мягкие лучи под контентом */}
+    <div className="relative card overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
         <HeroRays />
       </div>
@@ -24,13 +23,13 @@ export const MissionSection: React.FC = () => (
         <div>
           {/* Бейджи-акценты */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-sun-50 text-sun ring-1 ring-sun/30 px-3 py-1 text-xs font-semibold">
+            <span className="badge-sun">
               <Leaf className="w-4 h-4" /> Эко-подход
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 text-ink ring-1 ring-gray-200 px-3 py-1 text-xs font-semibold">
-              <Shield className="w-4 h-4 text-brand" /> Надёжность
+            <span className="badge-neutral">
+              <Shield className="w-4 h-4 text-brand-600" /> Надёжность
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 text-ink ring-1 ring-gray-200 px-3 py-1 text-xs font-semibold">
+            <span className="badge-neutral">
               <Heart className="w-4 h-4 text-sun" /> Забота о семье
             </span>
           </div>

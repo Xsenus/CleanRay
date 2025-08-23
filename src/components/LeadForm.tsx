@@ -170,7 +170,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.name}
                 onChange={(e) => updateField('name', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
                 placeholder="Ваше имя"
               />
             </div>
@@ -186,7 +186,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.phone}
                 onChange={handlePhoneChange}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
                 placeholder="+7 (___) ___-__-__"
               />
             </div>
@@ -202,7 +202,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.address}
                 onChange={(e) => updateField('address', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
                 placeholder="Улица, дом, квартира"
               />
             </div>
@@ -215,7 +215,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
               <select
                 value={formData.cleaningType}
                 onChange={(e) => updateField('cleaningType', e.target.value)}
-                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors">
+                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors">
                 <option value="regular">Поддерживающая</option>
                 <option value="general">Генеральная</option>
                 <option value="special">Специальная</option>
@@ -228,7 +228,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 min={10}
                 value={formData.area || ''}
                 onChange={(e) => updateField('area', parseInt(e.target.value) || 0)}
-                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors"
+                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
                 placeholder="50"
               />
             </div>
@@ -243,7 +243,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 rows={3}
                 value={formData.comment}
                 onChange={(e) => updateField('comment', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-100 outline-none transition-colors resize-none"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors resize-none"
                 placeholder="Дополнительные пожелания или информация"
               />
             </div>
@@ -255,7 +255,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
               type="checkbox"
               checked={formData.consent}
               onChange={(e) => updateField('consent', e.target.checked)}
-              className="mt-1 w-5 h-5 text-brand border-border focus:ring-brand-100"
+              className="mt-1 w-5 h-5 text-brand border-border focus:ring-brand-200"
             />
             <label className="text-sm text-muted leading-relaxed">
               Я согласен(а) на обработку персональных данных и принимаю{' '}

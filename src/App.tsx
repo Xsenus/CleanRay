@@ -128,18 +128,18 @@ function App() {
                 оборудования
               </p>
 
+              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
                 <button
                   onClick={() => openLeadForm()}
-                  className="bg-brand hover:bg-brand-600 text-white px-8 py-4 text-lg font-semibold transition-colors flex items-center justify-center gap-2">
-                  Заказать уборку
-                  <ArrowRight className="w-5 h-5" />
+                  className="btn-primary flex items-center justify-center gap-2">
+                  Заказать уборку <ArrowRight className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() =>
                     document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })
                   }
-                  className="border-2 border-brand text-brand hover:bg-brand hover:text-white px-8 py-4 text-lg font-semibold transition-colors">
+                  className="btn-outline-brand">
                   Рассчитать стоимость
                 </button>
               </div>
@@ -285,7 +285,7 @@ function App() {
                   service.popular ? 'border-brand shadow-lg transform scale-105' : 'border-border'
                 }`}>
                 {service.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand text-white px-4 py-1 text-sm font-semibold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-600 text-white px-4 py-1 text-sm font-semibold rounded-md shadow">
                     ПОПУЛЯРНО
                   </div>
                 )}
@@ -299,7 +299,7 @@ function App() {
                 <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-sun flex-shrink-0" />
                       <span className="text-ink">{feature}</span>
                     </li>
                   ))}
@@ -307,7 +307,7 @@ function App() {
 
                 <button
                   onClick={() => openLeadForm({ isGeneral: service.title === 'Генеральная' })}
-                  className="w-full bg-brand hover:bg-brand-600 text-white px-6 py-3 font-semibold transition-colors">
+                  className="w-full btn-primary">
                   Заказать услугу
                 </button>
               </div>
@@ -731,7 +731,9 @@ const FAQAccordion: React.FC = () => {
               className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
               <span className="font-semibold text-ink pr-4">{item.question}</span>
               <ChevronDown
-                className={`w-5 h-5 text-brand transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                className={`w-5 h-5 text-brand-600 transition-transform ${
+                  isOpen ? 'rotate-180' : ''
+                }`}
               />
             </button>
             {isOpen && (
