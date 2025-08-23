@@ -2,37 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS for enhanced styling */
+/* Base */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-
+  /* Берём семейство из tailwind.config (Montserrat) */
   body {
-    font-family: 'Montserrat', system-ui, Arial, sans-serif;
+    @apply font-sans;
   }
 }
 
+/* Utilities */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
 
-/* Focus styles for accessibility */
-*:focus {
-  @apply outline-none ring-2 ring-brand ring-offset-2;
+/* Фокус: показываем кольцо только при клавиатурной навигации */
+*:focus-visible {
+  @apply outline-none ring-2 ring-brand-300 ring-offset-2;
 }
 
-/* Ensure proper contrast for form elements */
-input[type='checkbox']:checked {
-  background-color: #1e40af;
-  border-color: #1e40af;
+/* Формы: современный способ покрасить чекбоксы/радио */
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: theme('colors.brand.600');
 }
 
+/* Фоллбэк для старых браузеров */
+input[type='checkbox']:checked,
 input[type='radio']:checked {
-  background-color: #1e40af;
-  border-color: #1e40af;
+  background-color: theme('colors.brand.600');
+  border-color: theme('colors.brand.600');
 }
 
 /* Loading animation */
@@ -45,18 +48,21 @@ input[type='radio']:checked {
     opacity: 0.5;
   }
 }
-
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 /* Кнопки */
 .btn-primary {
-  @apply bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-brand-200;
+  @apply bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-md
+         transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300;
 }
+
 .btn-outline-brand {
-  @apply border-2 border-brand-600 text-brand-600 hover:bg-brand-600 hover:text-white font-semibold px-6 py-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-brand-200;
+  @apply border-2 border-brand-600 text-brand-600 hover:bg-brand-600 hover:text-white font-semibold
+         px-6 py-3 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300;
 }
+
 .btn-ghost {
   @apply text-brand-600 hover:text-brand-700 hover:bg-brand-50/40 px-3 py-2 rounded-md transition-colors;
 }
@@ -73,13 +79,16 @@ input[type='radio']:checked {
 .card {
   @apply bg-white border border-gray-200 shadow-sm rounded-2xl;
 }
+
+/* Лёгкая фирменная подложка */
 .section-muted {
-  @apply bg-gradient-to-br from-brand-50/60 via-white to-white;
+  @apply bg-gradient-to-br from-sky-50 via-white to-white;
 }
 
 /* Инпуты */
 .input {
-  @apply w-full px-4 py-3 border border-border rounded-md focus:border-brand-600 focus:ring-2 focus:ring-brand-200 outline-none transition-colors;
+  @apply w-full px-4 py-3 border border-border rounded-md outline-none transition-colors
+         focus:border-brand-600 focus:ring-2 focus:ring-brand-300;
 }
 
 /* Ссылки */

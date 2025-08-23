@@ -55,8 +55,14 @@ export default {
         border: '#E2E8F0',
       },
 
+      // fontFamily: {
+      //   sans: ['Montserrat', 'system-ui', 'Arial', 'sans-serif'],
+      //   logo: ['Oranienbaum', 'serif'],
+      // },
+
       fontFamily: {
-        montserrat: ['Montserrat', 'system-ui', 'Arial', 'sans-serif'],
+        sans: ['Oranienbaum', 'serif'],
+        logo: ['Oranienbaum', 'serif'],
       },
 
       borderRadius: {
