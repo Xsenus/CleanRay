@@ -25,6 +25,7 @@ import { GiftSection } from './components/GiftSection';
 import { SubscriptionSection } from './components/SubscriptionSection';
 import { TrustBadgesMarquee } from './components/TrustBadgesMarquee';
 import { QuoteParams } from './types';
+import { HeroGhostLogo } from './components/HeroGhostLogo';
 
 function App() {
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
@@ -77,8 +78,6 @@ function App() {
     ],
   };
 
-  const heroLogoSrc = import.meta.env.VITE_HERO_LOGO?.trim() || undefined;
-
   return (
     <HelmetProvider>
       <div className="font-montserrat">
@@ -95,16 +94,14 @@ function App() {
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-100 to-white">
           {/* Фоновые слои */}
           <div aria-hidden="true" className="absolute inset-0 z-0">
-            {/* Фото */}
             <div
               className="absolute inset-0 bg-center bg-cover opacity-40 sm:opacity-60 pointer-events-none select-none"
               style={{ backgroundImage: `url(${import.meta.env.BASE_URL}images/hero-window.jpg)` }}
             />
-            {/* Затухание к низу для читаемости текста */}
             <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/90" />
           </div>
 
-          {/* Лучи — поверх фото */}
+          {/* Лучи */}
           <div
             aria-hidden="true"
             className="absolute inset-0 z-20 pointer-events-none select-none opacity-80">
@@ -112,21 +109,13 @@ function App() {
           </div>
 
           {/* Логотип-призрак под лучами */}
-          {heroLogoSrc && (
-            <img
-              src={heroLogoSrc}
-              alt=""
-              aria-hidden="true"
-              className="absolute z-10 left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none select-none w-[55vw] max-w-[820px]"
-            />
-          )}
+          <HeroGhostLogo className="left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 w-[55vw] max-w-[820px]" />
 
-          {/* Хедер гарантированно над лучами */}
+          {/* Хедер и контент поверх всего */}
           <div className="relative z-30">
             <Header onOrderClick={() => openLeadForm()} />
           </div>
 
-          {/* Контент выше всего */}
           <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 text-center">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-ink mb-6 leading-tight">
