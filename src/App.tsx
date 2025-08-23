@@ -14,9 +14,38 @@ import { QuoteParams } from './types';
 import { HeroGhostLogo } from './components/HeroGhostLogo';
 import { ComparisonSliderSmart } from './components/ComparisonSliderSmart';
 import Footer from './components/Footer';
+import { useSiteConfig } from './hooks/useSiteConfig';
+
+const KEYWORDS = [
+  'уборка',
+  'клининг',
+  'уборка квартир',
+  'уборка домов',
+  'уборка коттеджей',
+  'клининг квартир',
+  'клининг домов',
+  'клининг Алматы',
+  'уборка Алматы',
+  'уборка квартир Алматы',
+  'клининг квартир Алматы',
+  'профессиональный клининг Алматы',
+  'качественный клининг Алматы',
+  'уборка после ремонта Алматы',
+  'влажная уборка',
+  'генеральная уборка Алматы',
+  'регулярная уборка Алматы',
+  'уборка в подарок',
+  'уборка в подарок Алматы',
+  'стандартная уборка Алматы',
+  'эко-клининг Алматы',
+  'экологическая уборка Алматы',
+];
 
 function App() {
   const base = import.meta.env.BASE_URL;
+  const cfg = useSiteConfig();
+  const canonicalUrl =
+    typeof window !== 'undefined' ? `${window.location.origin}${base}` : undefined;
 
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
   const [leadFormData, setLeadFormData] = useState<Partial<QuoteParams>>();
@@ -36,29 +65,29 @@ function App() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://ЛУЧисто.kz/#organization',
-        name: 'ЛУЧисто',
-        url: 'https://ЛУЧисто.kz',
-        telephone: '+7 (727) 000-00-00',
-        email: 'info@ЛУЧисто.kz',
+        '@id': `${canonicalUrl}#organization`,
+        name: cfg.company.name || 'ЛУЧисто',
+        url: canonicalUrl,
+        telephone: cfg.contacts.phone || '+7 (727) 000-00-00',
+        email: cfg.contacts.email || 'info@luchisto.kz',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'ул. Примерная, 123',
+          streetAddress: cfg.contacts.address || 'ул. Примерная, 123',
           addressLocality: 'Алматы',
           addressCountry: 'KZ',
         },
       },
       {
         '@type': 'LocalBusiness',
-        '@id': 'https://ЛУЧисто.kz/#business',
+        '@id': `${canonicalUrl}#business`,
         name: 'ЛУЧисто — Профессиональная уборка',
         description:
-          'Качественная уборка квартир и домов в Алматы. Эко-средства, обученный персонал, гарантия качества.',
-        url: 'https://ЛУЧисто.kz',
-        telephone: '+7 (727) 000-00-00',
+          'Профессиональная уборка квартир и домов в Алматы: влажная и генеральная уборка, клининг после ремонта. Эко-средства, опыт 5+ лет, 98% довольных клиентов.',
+        url: canonicalUrl,
+        telephone: cfg.contacts.phone || '+7 (727) 000-00-00',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'ул. Примерная, 123',
+          streetAddress: cfg.contacts.address || 'ул. Примерная, 123',
           addressLocality: 'Алматы',
           addressCountry: 'KZ',
         },
@@ -72,11 +101,13 @@ function App() {
     <HelmetProvider>
       <div className="font-montserrat">
         <Helmet>
-          <title>ЛУЧисто — Профессиональная уборка квартир и домов в Алматы</title>
+          <title>Уборка квартир в Алматы — ЛУЧисто | Генеральная, влажная, после ремонта</title>
           <meta
             name="description"
-            content="Качественная уборка квартир от профессионалов ЛУЧисто. Эко-средства, обученный персонал, гарантия качества. Заказать уборку можно уже на завтра!"
+            content="ЛУЧисто — профессиональная уборка квартир и домов в Алматы: влажная и генеральная уборка, клининг после ремонта, регулярная уборка. Эко-средства, опыт 5+ лет, 98% довольных клиентов."
           />
+          {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+          <meta name="keywords" content={KEYWORDS.join(', ')} />
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         </Helmet>
 
@@ -109,11 +140,13 @@ function App() {
           <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 text-center">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-ink mb-6 leading-tight">
-                Профессиональная уборка <span className="text-brand">ЛУЧ</span>исто
+                Профессиональная уборка квартир и домов в&nbsp;Алматы —{' '}
+                <span className="text-brand">ЛУЧ</span>исто
               </h1>
+
               <p className="text-xl sm:text-2xl text-muted mb-8 leading-relaxed max-w-3xl mx-auto">
-                Создаем идеальную чистоту в вашем доме с помощью экологичных средств и современного
-                оборудования
+                Влажная и генеральная уборка, клининг после ремонта. Эко-средства, обученный
+                персонал, гарантия качества.
               </p>
 
               {/* CTAs */}
@@ -141,7 +174,7 @@ function App() {
         <Section
           id="results"
           title="Результаты нашей работы"
-          subtitle="Посмотрите, как преображаются квартиры после уборки"
+          subtitle="Посмотрите, как преображаются квартиры после клининга"
           background="gray">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
             {/* Кухня */}
