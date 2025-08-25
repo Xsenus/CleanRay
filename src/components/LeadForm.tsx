@@ -145,24 +145,41 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     }
   };
 
+  const Panel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <div
+      className={[
+        inline
+          ? ''
+          : // full-screen на мобилках, карточка на десктопе
+            'w-full sm:max-w-2xl bg-white sm:rounded-2xl sm:shadow-xl',
+        // ограничиваем высоту и включаем прокрутку внутреннего контента
+        'max-h-[100dvh] sm:max-h-[85vh] overflow-y-auto',
+      ].join(' ')}>
+      {children}
+    </div>
+  );
+
   const formContent = (
-    <div className={`${inline ? '' : 'bg-white p-8 max-w-2xl w-full mx-4'}`}>
+    <Panel>
+      {/* Шапка: на мобилках прилипает сверху, чтобы кнопка закрытия была доступна */}
       {!inline && (
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold text-ink">Оставить заявку</h3>
-          {onClose && (
-            <button
-              onClick={onClose}
-              className="text-muted hover:text-ink transition-colors"
-              aria-label="Закрыть">
-              <X className="w-6 h-6" />
-            </button>
-          )}
+        <div className="sticky top-0 z-10 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-border px-5 py-4 sm:rounded-t-2xl">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg sm:text-2xl font-bold text-ink">Оставить заявку</h3>
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="text-muted hover:text-ink transition-colors p-1"
+                aria-label="Закрыть">
+                <X className="w-6 h-6" />
+              </button>
+            )}
+          </div>
         </div>
       )}
 
       {isSubmitted ? (
-        <div className="text-center py-8">
+        <div className="px-5 py-8 sm:p-8 text-center">
           <div className="w-16 h-16 bg-green-100 mx-auto mb-4 flex items-center justify-center rounded-full">
             <svg
               viewBox="0 0 24 24"
@@ -177,7 +194,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
           <p className="text-muted">Мы свяжемся с вами в течение 15 минут для уточнения деталей.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="px-5 pb-6 pt-4 sm:p-8 space-y-4 text-base">
           {/* Имя */}
           <div>
             <label className="block text-sm font-medium text-ink mb-2">Имя *</label>
@@ -188,8 +205,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.name}
                 onChange={(e) => updateField('name', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors text-base"
                 placeholder="Ваше имя"
+                inputMode="text"
+                autoComplete="name"
               />
             </div>
           </div>
@@ -205,13 +224,15 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 aria-invalid={!isPhoneValid}
-                className={`w-full pl-10 pr-4 py-3 border rounded-md outline-none transition-colors
+                className={`w-full pl-10 pr-4 py-3 border rounded-md outline-none transition-colors text-base
                   ${
                     isPhoneValid
                       ? 'border-border focus:border-brand focus:ring-2 focus:ring-brand-200'
                       : 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200'
                   }`}
                 placeholder="+7 (___) ___-__-__"
+                inputMode="tel"
+                autoComplete="tel"
               />
             </div>
             {!isPhoneValid && (
@@ -231,8 +252,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.address}
                 onChange={(e) => updateField('address', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors text-base"
                 placeholder="Улица, дом, квартира"
+                inputMode="text"
+                autoComplete="street-address"
               />
             </div>
           </div>
@@ -244,7 +267,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
               <select
                 value={formData.cleaningType}
                 onChange={(e) => updateField('cleaningType', e.target.value)}
-                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors">
+                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors text-base">
                 <option value="regular">Влажная</option>
                 <option value="general">Генеральная</option>
                 <option value="special">Специальная</option>
@@ -259,8 +282,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 min={10}
                 value={formData.area || ''}
                 onChange={(e) => updateField('area', parseInt(e.target.value) || 0)}
-                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
+                className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors text-base"
                 placeholder="50"
+                inputMode="numeric"
               />
             </div>
           </div>
@@ -274,7 +298,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 rows={3}
                 value={formData.comment}
                 onChange={(e) => updateField('comment', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors resize-none"
+                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors resize-none text-base"
                 placeholder="Дополнительные пожелания или информация"
               />
             </div>
@@ -296,24 +320,34 @@ export const LeadForm: React.FC<LeadFormProps> = ({
             </label>
           </div>
 
-          {/* Отправка */}
-          <button
-            type="submit"
-            disabled={!formData.consent || isSubmitting || !isPhoneValid}
-            className="w-full bg-brand hover:bg-brand-600 disabled:bg-gray-300 text-white px-6 py-4 font-semibold transition-colors">
-            {isSubmitting ? 'Отправляется...' : 'Отправить заявку'}
-          </button>
+          {/* Кнопка отправки — прилипает снизу на мобильных */}
+          <div className="sticky bottom-0 left-0 right-0 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60 -mx-5 px-5 py-4 sm:static sm:bg-transparent sm:px-0 sm:py-0 border-t sm:border-0">
+            <button
+              type="submit"
+              disabled={!formData.consent || isSubmitting || !isPhoneValid}
+              className="w-full bg-brand hover:bg-brand-600 disabled:bg-gray-300 text-white px-6 py-4 font-semibold transition-colors rounded-md">
+              {isSubmitting ? 'Отправляется...' : 'Отправить заявку'}
+            </button>
+          </div>
         </form>
       )}
-    </div>
+    </Panel>
   );
 
   if (inline) return formContent;
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      {formContent}
+    <div
+      className="fixed inset-0 z-50"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Форма обратной связи">
+      {/* Затемнение + контейнер, учитывающий безопасную высоту мобильных браузеров */}
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+      <div className="relative h-[100dvh] w-full flex items-stretch sm:items-center justify-center sm:p-4">
+        {formContent}
+      </div>
     </div>
   );
 };
