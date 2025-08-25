@@ -7,9 +7,14 @@
   html {
     scroll-behavior: smooth;
   }
-  /* Берём семейство из tailwind.config (Montserrat) */
+  /* Берём семейство из tailwind.config (Tahoma) */
   body {
     @apply font-sans;
+  }
+  /* Чище рендер на Windows/macOS */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -57,12 +62,10 @@ input[type='radio']:checked {
   @apply bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3 rounded-md
          transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300;
 }
-
 .btn-outline-brand {
   @apply border-2 border-brand-600 text-brand-600 hover:bg-brand-600 hover:text-white font-semibold
          px-6 py-3 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300;
 }
-
 .btn-ghost {
   @apply text-brand-600 hover:text-brand-700 hover:bg-brand-50/40 px-3 py-2 rounded-md transition-colors;
 }
