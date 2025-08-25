@@ -1,4 +1,4 @@
-import { Sparkles, Phone, Clock, MessageCircle } from 'lucide-react';
+import { Sparkles, Phone, Clock, MessageCircle, MapPin, Instagram } from 'lucide-react';
 import { useSiteConfig } from '../hooks/useSiteConfig';
 import { formatPhoneDisplay } from '../utils/phone';
 
@@ -15,7 +15,16 @@ const Footer: React.FC = () => {
       )}`
     : undefined;
 
-  // const mailHref = cfg.contacts.email ? `mailto:${cfg.contacts.email}` : undefined;
+  // --- Instagram: нормализуем и показываем @handle ---
+  const rawInsta = cfg.links?.instagram?.trim();
+  const instaHandle = rawInsta
+    ? rawInsta
+        .replace(/^https?:\/\/(www\.)?instagram\.com\//i, '')
+        .replace(/\/+$/, '')
+        .replace(/^@/, '')
+    : undefined;
+  const instaHref = instaHandle ? `https://instagram.com/${instaHandle}` : undefined;
+
   const year = cfg.year ?? new Date().getFullYear();
 
   return (
@@ -41,12 +50,11 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Контакты</h4>
             <address className="not-italic space-y-3">
-              {/* WhatsApp */}
-
               {rawPhone && (
                 <a
                   href={telHref}
-                  className="flex items-center gap-3 text-white/80 hover:text-white">
+                  className="flex items-center gap-3 text-white/80 hover:text-white"
+                  aria-label={`Позвонить ${displayPhone}`}>
                   <Phone className="w-5 h-5 text-brand-400 shrink-0" />
                   {displayPhone}
                 </a>
@@ -57,18 +65,21 @@ const Footer: React.FC = () => {
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-white/80 hover:text-white">
-                  <MessageCircle className="w-5 h-5 text-brand-400 shrink-0" />
+                  className="flex items-center gap-3 text-white/80 hover:text-white"
+                  aria-label={`Написать в WhatsApp на номер ${displayPhone}`}>
+                  <MessageCircle className="w-5 h-5 text-green-400 shrink-0" />
                   WhatsApp
                 </a>
               )}
 
-              {/* {cfg.contacts.email && (
+              {instaHref && instaHandle && (
                 <a
-                  href={mailHref}
-                  className="flex items-center gap-3 text-white/80 hover:text-white">
-                  <Mail className="w-5 h-5 text-brand-400 shrink-0" />
-                  {cfg.contacts.email}
+                  href={instaHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/80 hover:text-white"
+                  aria-label={`Перейти в Instagram ${instaHandle}`}>
+                  <Instagram className="w-5 h-5 text-pink-400 shrink-0" />@{instaHandle}
                 </a>
               )}
 
@@ -77,7 +88,7 @@ const Footer: React.FC = () => {
                   <MapPin className="w-5 h-5 text-brand-400 shrink-0" />
                   {cfg.contacts.address}
                 </div>
-              )} */}
+              )}
 
               {cfg.contacts.hours && (
                 <div className="flex items-center gap-3 text-white/80">
@@ -90,10 +101,10 @@ const Footer: React.FC = () => {
 
           {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Услуги</h4>
+            <h4 className="text-lg font-semibold mb-4">УСЛУГИ</h4>
             <nav className="space-y-2">
               <a href="#services" className="block text-white/80 hover:text-white">
-                Поддерживающая уборка
+                Влажная уборка
               </a>
               <a href="#services" className="block text-white/80 hover:text-white">
                 Генеральная уборка
@@ -102,7 +113,17 @@ const Footer: React.FC = () => {
                 Специальная уборка
               </a>
               <a href="#quote" className="block text-white/80 hover:text-white">
-                Расчёт стоимости
+                Расчет стоимости
+              </a>
+            </nav>
+
+            <h4 className="text-lg font-semibold mt-6 mb-4">ПЛЮШКИ</h4>
+            <nav className="space-y-2">
+              <a href="#subscription" className="block text-white/80 hover:text-white">
+                Регулярный клининг
+              </a>
+              <a href="#gift" className="block text-white/80 hover:text-white">
+                Уборка в подарок
               </a>
             </nav>
           </div>
