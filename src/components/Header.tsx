@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ onOrderClick }) => {
             FAQ
           </a>
           <a
-            href="#contact"
+            href="#contacts"
             className="py-2 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-md">
             Контакты
           </a>
@@ -124,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({ onOrderClick }) => {
             FAQ
           </a>
           <a
-            href="#contact"
+            href="#contacts"
             onClick={() => setOpen(false)}
             className="block px-2 py-2 rounded-md hover:bg-gray-50">
             Контакты

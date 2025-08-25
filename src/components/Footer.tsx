@@ -1,20 +1,25 @@
-import { Sparkles, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Sparkles, Phone, Clock, MessageCircle } from 'lucide-react';
 import { useSiteConfig } from '../hooks/useSiteConfig';
+import { formatPhoneDisplay } from '../utils/phone';
 
-{
-  /* Footer */
-}
 const Footer: React.FC = () => {
   const cfg = useSiteConfig();
 
-  const telHref = cfg.contacts.phone
-    ? `tel:${cfg.contacts.phone.replace(/[^\d+]/g, '')}`
+  const rawPhone = cfg.contacts.phone ?? '+7 (088) 008 173';
+  const displayPhone = formatPhoneDisplay(rawPhone);
+  const digits = rawPhone.replace(/[^\d+]/g, '');
+  const telHref = digits ? `tel:${digits}` : undefined;
+  const waHref = digits
+    ? `https://wa.me/${digits.replace(/^\+/, '')}?text=${encodeURIComponent(
+        'Здравствуйте! Хочу заказать уборку.',
+      )}`
     : undefined;
-  const mailHref = cfg.contacts.email ? `mailto:${cfg.contacts.email}` : undefined;
+
+  // const mailHref = cfg.contacts.email ? `mailto:${cfg.contacts.email}` : undefined;
   const year = cfg.year ?? new Date().getFullYear();
 
   return (
-    <footer className="relative bg-ink text-white">
+    <footer id="contacts" className="relative bg-ink text-white">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_380px_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]"
         aria-hidden="true"
@@ -36,15 +41,29 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Контакты</h4>
             <address className="not-italic space-y-3">
-              {cfg.contacts.phone && (
+              {/* WhatsApp */}
+
+              {rawPhone && (
                 <a
                   href={telHref}
                   className="flex items-center gap-3 text-white/80 hover:text-white">
                   <Phone className="w-5 h-5 text-brand-400 shrink-0" />
-                  {cfg.contacts.phone}
+                  {displayPhone}
                 </a>
               )}
-              {cfg.contacts.email && (
+
+              {waHref && (
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/80 hover:text-white">
+                  <MessageCircle className="w-5 h-5 text-brand-400 shrink-0" />
+                  WhatsApp
+                </a>
+              )}
+
+              {/* {cfg.contacts.email && (
                 <a
                   href={mailHref}
                   className="flex items-center gap-3 text-white/80 hover:text-white">
@@ -52,12 +71,14 @@ const Footer: React.FC = () => {
                   {cfg.contacts.email}
                 </a>
               )}
+
               {cfg.contacts.address && (
                 <div className="flex items-center gap-3 text-white/80">
                   <MapPin className="w-5 h-5 text-brand-400 shrink-0" />
                   {cfg.contacts.address}
                 </div>
-              )}
+              )} */}
+
               {cfg.contacts.hours && (
                 <div className="flex items-center gap-3 text-white/80">
                   <Clock className="w-5 h-5 text-brand-400 shrink-0" />
