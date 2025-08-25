@@ -11,7 +11,7 @@ export const MissionSection: React.FC = () => (
         Миссия компании <span className="text-brand">ЛУЧ</span>исто
       </>
     }
-    subtitle="Мы — надёжные помощники в создании идеального порядка."
+    subtitle="Мы помогаем заботиться о комфорте тех, кого вы любите."
     background="white">
     <div className="relative card overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
@@ -21,7 +21,7 @@ export const MissionSection: React.FC = () => (
       <div className="relative z-10 grid md:grid-cols-2 gap-8 p-6 sm:p-8">
         {/* Левая колонка — текст, цель, цитата и CTA */}
         <div>
-          {/* Бейджи-акценты */}
+          {/* Значки */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
             <span className="badge-sun">
               <Leaf className="w-4 h-4" /> Эко-подход
@@ -63,17 +63,18 @@ export const MissionSection: React.FC = () => (
             </blockquote>
           </figure>
 
-          {/* CTA: абонемент и подарок */}
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="#quote"
+              href="#gift"
+              aria-label="Переход к разделу подарочного сертификата"
               className="inline-flex justify-center items-center bg-brand hover:bg-brand-600 text-white px-5 py-3 rounded-md font-semibold transition-colors">
-              Регулярный клининг
+              Подарить уборку
             </a>
             <a
-              href="#quote"
+              href="#subscription"
+              aria-label="Переход к разделу регулярного клининга (абонемент)"
               className="inline-flex justify-center items-center border-2 border-brand text-brand hover:bg-brand hover:text-white px-5 py-3 rounded-md font-semibold transition-colors">
-              Подарить уборку
+              Регулярный клининг
             </a>
           </div>
         </div>
