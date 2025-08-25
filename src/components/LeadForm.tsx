@@ -15,7 +15,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({
   initialData,
   inline = false,
 }) => {
-  // Ключ Web3Forms и (опционально) адрес получателя
   const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
   const WEB3FORMS_TO = import.meta.env.VITE_WEB3FORMS_TO as string | undefined;
 
@@ -23,6 +22,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     regular: 'Влажная',
     general: 'Генеральная',
     special: 'Специальная',
+    recurring: 'Регулярный клининг',
+    gift: 'Уборка в подарок',
   };
 
   const [formData, setFormData] = useState<LeadFormData>({
@@ -42,9 +43,46 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // ===== Телефон =====
+  const onlyDigits = (s: string) => s.replace(/\D/g, '');
+
+  const formatKzPhone = (raw: string) => {
+    let d = onlyDigits(raw);
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    if (!d) return '';
+    if (!d.startsWith('7')) return `+${d}`;
+
+    const p1 = d.slice(1, 4);
+    const p2 = d.slice(4, 7);
+    const p3 = d.slice(7, 9);
+    const p4 = d.slice(9, 11);
+
+    let out = '+7';
+    if (p1) out += ` (${p1}`;
+    if (p1 && p1.length === 3) out += ')';
+    if (p2) out += ' ' + p2;
+    if (p3) out += `-${p3}`;
+    if (p4) out += `-${p4}`;
+    return out;
+  };
+
+  const getKzDigits = (val: string) => {
+    let d = onlyDigits(val);
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    return d;
+  };
+
+  const phoneDigits = getKzDigits(formData.phone);
+  const isPhoneValid = phoneDigits.startsWith('7') && phoneDigits.length === 11;
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatKzPhone(e.target.value);
+    updateField('phone', formatted);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.consent) return;
+    if (!formData.consent || !isPhoneValid) return;
 
     setIsSubmitting(true);
     try {
@@ -90,8 +128,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({
         body: fd,
         headers: { Accept: 'application/json' },
       });
-
       const data = await res.json();
+
       if (data?.success) {
         setIsSubmitted(true);
         setTimeout(() => onClose?.(), 1800);
@@ -105,19 +143,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const formatPhoneNumber = (value: string) => {
-    const cleaned = value.replace(/\D/g, '');
-    if (cleaned.startsWith('7')) {
-      return cleaned.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '+$1 ($2) $3-$4-$5');
-    }
-    return value;
-  };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhoneNumber(e.target.value);
-    updateField('phone', formatted);
   };
 
   const formContent = (
@@ -179,10 +204,21 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 required
                 value={formData.phone}
                 onChange={handlePhoneChange}
-                className="w-full pl-10 pr-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors"
+                aria-invalid={!isPhoneValid}
+                className={`w-full pl-10 pr-4 py-3 border rounded-md outline-none transition-colors
+                  ${
+                    isPhoneValid
+                      ? 'border-border focus:border-brand focus:ring-2 focus:ring-brand-200'
+                      : 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200'
+                  }`}
                 placeholder="+7 (___) ___-__-__"
               />
             </div>
+            {!isPhoneValid && (
+              <p className="mt-1 text-sm text-red-600">
+                Введите номер в формате <b>+7 (XXX) XXX-XX-XX</b>
+              </p>
+            )}
           </div>
 
           {/* Адрес */}
@@ -212,6 +248,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 <option value="regular">Влажная</option>
                 <option value="general">Генеральная</option>
                 <option value="special">Специальная</option>
+                <option value="recurring">Регулярный клининг</option>
+                <option value="gift">Уборка в подарок</option>
               </select>
             </div>
             <div>
@@ -261,7 +299,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
           {/* Отправка */}
           <button
             type="submit"
-            disabled={!formData.consent || isSubmitting}
+            disabled={!formData.consent || isSubmitting || !isPhoneValid}
             className="w-full bg-brand hover:bg-brand-600 disabled:bg-gray-300 text-white px-6 py-4 font-semibold transition-colors">
             {isSubmitting ? 'Отправляется...' : 'Отправить заявку'}
           </button>
