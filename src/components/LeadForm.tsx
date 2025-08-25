@@ -20,7 +20,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
   const WEB3FORMS_TO = import.meta.env.VITE_WEB3FORMS_TO as string | undefined;
 
   const typeLabel: Record<string, string> = {
-    regular: 'Поддерживающая',
+    regular: 'Влажная',
     general: 'Генеральная',
     special: 'Специальная',
   };
@@ -58,13 +58,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({
         formData.phone ? ` (${formData.phone})` : ''
       }`;
 
-      // Формируем multipart/form-data — самый совместимый формат для Web3Forms
       const fd = new FormData();
       fd.append('access_key', key);
       fd.append('subject', subject);
       fd.append('from_name', 'Форма сайта ЛУЧисто');
-
-      // Человекочитаемые заголовки полей (письмо будет аккуратным и по-русски)
       fd.append('Имя', formData.name);
       fd.append('Телефон', formData.phone);
       fd.append('Адрес', formData.address);
@@ -74,7 +71,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({
       fd.append('Согласие на обработку', formData.consent ? 'Да' : 'Нет');
       fd.append('Источник', location.href);
 
-      // Сводка одним полем (многострочный текст)
       const summary =
         `— Заявка с сайта ЛУЧисто —\n` +
         `Имя: ${formData.name}\n` +
@@ -86,7 +82,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({
         (initialData ? `\nПараметры расчёта:\n${JSON.stringify(initialData, null, 2)}\n` : '');
       fd.append('Сводка', summary);
 
-      // Антиспам и адрес получателя
       fd.append('botcheck', '');
       if (WEB3FORMS_TO?.trim()) fd.append('email_to', WEB3FORMS_TO.trim());
 
@@ -99,8 +94,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
       const data = await res.json();
       if (data?.success) {
         setIsSubmitted(true);
-        // при необходимости: очистка/закрытие
-        // setTimeout(() => onClose?.(), 1800);
+        setTimeout(() => onClose?.(), 1800);
       } else {
         console.error('Web3Forms error:', data);
         alert(`Не удалось отправить заявку.\n${data?.message ?? 'Попробуйте ещё раз.'}`);
@@ -113,7 +107,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({
     }
   };
 
-  // Маска телефона (KZ): +7 (XXX) XXX-XX-XX
   const formatPhoneNumber = (value: string) => {
     const cleaned = value.replace(/\D/g, '');
     if (cleaned.startsWith('7')) {
@@ -216,7 +209,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({
                 value={formData.cleaningType}
                 onChange={(e) => updateField('cleaningType', e.target.value)}
                 className="w-full px-4 py-3 border border-border focus:border-brand focus:ring-2 focus:ring-brand-200 outline-none transition-colors">
-                <option value="regular">Поддерживающая</option>
+                <option value="regular">Влажная</option>
                 <option value="general">Генеральная</option>
                 <option value="special">Специальная</option>
               </select>
